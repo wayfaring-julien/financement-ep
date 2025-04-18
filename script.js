@@ -1,29 +1,93 @@
-// Montant initial (tu peux le modifier ici)
-let montant = 420; // ← à mettre à jour manuellement
+let total = 0;
 
-document.getElementById("montant").textContent = montant;
+document.getElementById("btn-participer").addEventListener("click", () => {
+  document.getElementById("form-container").classList.toggle("hidden");
+});
 
-// Fonction pour copier le RIB
-function copierRIB() {
-  const rib = "FR76 1234 5678 9101 1121 3141 516";
-  navigator.clipboard.writeText(rib).then(() => {
-    document.getElementById("confirmation").textContent = "RIB copié dans le presse-papier ✅";
-    setTimeout(() => {
-      document.getElementById("confirmation").textContent = "";
-    }, 3000);
-  });
-}// Montant initial (tu peux le modifier ici)
-let montant = 420; // ← à mettre à jour manuellement
+document.getElementById("envoyer").addEventListener("click", () => {
+  const montant = parseFloat(document.getElementById("montant").value);
+  const prenom = document.getElementById("prenom").value.trim();
+  const message = document.getElementById("message").value.trim();
+  const afficherMontant = document.getElementById("afficherMontant").checked;
+  const moyen = document.querySelector('input[name="moyen"]:checked').value;
 
-document.getElementById("montant").textContent = montant;
+  if (!montant || !prenom) {
+    alert("Merci de remplir au moins le montant et ton prénom/pseudo.");
+    return;
+  }
 
-// Fonction pour copier le RIB
-function copierRIB() {
-  const rib = "FR76 1234 5678 9101 1121 3141 516";
-  navigator.clipboard.writeText(rib).then(() => {
-    document.getElementById("confirmation").textContent = "RIB copié dans le presse-papier ✅";
-    setTimeout(() => {
-      document.getElementById("confirmation").textContent = "";
-    }, 3000);
-  });
-}
+  // Incrémenter le compteur
+  total += montant;
+  document.getElementById("total").textContent = total.toFixed(2);
+
+  // Ajouter le message
+  const bloc = document.createElement("div");
+  bloc.className = "message";
+
+  bloc.innerHTML = `
+    <strong>${prenom}</strong> a soutenu mon projet !
+    ${message ? `<p>« ${message} »</p>` : ""}
+    ${afficherMontant ? `<p>Montant : ${montant.toFixed(2)} €</p>` : ""}
+  `;
+
+  document.getElementById("liste-messages").prepend(bloc);
+
+  // Redirection selon le moyen choisi
+  let lien = "#";
+  if (moyen === "stripe") lien = "https://buy.stripe.com/...";
+  if (moyen === "wero") lien = "https://www.wero.app/...";
+  if (moyen === "rib") lien = "https://mon-rib-en-pdf.fr/...";
+
+  window.open(lien, "_blank");
+
+  // Réinitialiser le formulaire
+  document.getElementById("montant").value = "";
+  document.getElementById("prenom").value = "";
+  document.getElementById("message").value = "";
+});let total = 0;
+
+document.getElementById("btn-participer").addEventListener("click", () => {
+  document.getElementById("form-container").classList.toggle("hidden");
+});
+
+document.getElementById("envoyer").addEventListener("click", () => {
+  const montant = parseFloat(document.getElementById("montant").value);
+  const prenom = document.getElementById("prenom").value.trim();
+  const message = document.getElementById("message").value.trim();
+  const afficherMontant = document.getElementById("afficherMontant").checked;
+  const moyen = document.querySelector('input[name="moyen"]:checked').value;
+
+  if (!montant || !prenom) {
+    alert("Merci de remplir au moins le montant et ton prénom/pseudo.");
+    return;
+  }
+
+  // Incrémenter le compteur
+  total += montant;
+  document.getElementById("total").textContent = total.toFixed(2);
+
+  // Ajouter le message
+  const bloc = document.createElement("div");
+  bloc.className = "message";
+
+  bloc.innerHTML = `
+    <strong>${prenom}</strong> a soutenu mon projet !
+    ${message ? `<p>« ${message} »</p>` : ""}
+    ${afficherMontant ? `<p>Montant : ${montant.toFixed(2)} €</p>` : ""}
+  `;
+
+  document.getElementById("liste-messages").prepend(bloc);
+
+  // Redirection selon le moyen choisi
+  let lien = "#";
+  if (moyen === "stripe") lien = "https://buy.stripe.com/...";
+  if (moyen === "wero") lien = "https://www.wero.app/...";
+  if (moyen === "rib") lien = "https://mon-rib-en-pdf.fr/...";
+
+  window.open(lien, "_blank");
+
+  // Réinitialiser le formulaire
+  document.getElementById("montant").value = "";
+  document.getElementById("prenom").value = "";
+  document.getElementById("message").value = "";
+});
