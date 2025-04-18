@@ -7,23 +7,76 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="container">
-    <h1>🎵 Financement de mon premier EP 🎶</h1>
-    <p>Merci de soutenir ce projet musical indépendant !</p>
+  <h1>🎶 Soutiens mon EP musical !</h1>
 
-    <div class="compteur">
-      <h2>Montant récolté : <span id="montant">0</span> €</h2>
-      <p>Objectif : 1000 €</p>
-    </div>
-
-    <div class="boutons">
-      <a href="https://lydia-app.com/ton-lien" target="_blank">💸 Contribuer via Lydia</a>
-      <a href="https://wero.app/ton-lien" target="_blank">💳 Contribuer via Wero</a>
-      <a href="#" onclick="copierRIB()">📋 Copier le RIB</a>
-    </div>
-
-    <p id="confirmation"></p>
+  <div class="compteur">
+    💸 Montant total récolté : <span id="total">0</span> €
   </div>
+
+  <button id="btn-participer">💖 Participer</button>
+
+  <div id="form-container" class="hidden">
+    <input type="number" id="montant" placeholder="Montant (€)" />
+    <input type="text" id="prenom" placeholder="Prénom ou pseudo" />
+    <textarea id="message" placeholder="Laisse un message ! (optionnel)"></textarea>
+    
+    <label>
+      <input type="checkbox" id="afficherMontant" checked />
+      Afficher le montant dans le message public
+    </label>
+
+    <div class="paiements">
+      <label><input type="radio" name="moyen" value="stripe" checked /> Stripe</label>
+      <label><input type="radio" name="moyen" value="wero" /> Wero</label>
+      <label><input type="radio" name="moyen" value="rib" /> Virement RIB</label>
+    </div>
+
+    <button id="envoyer">Envoyer</button>
+  </div>
+
+  <h2>📝 Messages des contributeurs</h2>
+  <div id="liste-messages"></div>
+
+  <script src="script.js"></script>
+</body>
+</html><!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Financement de mon EP</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h1>🎶 Soutiens mon EP musical !</h1>
+
+  <div class="compteur">
+    💸 Montant total récolté : <span id="total">0</span> €
+  </div>
+
+  <button id="btn-participer">💖 Participer</button>
+
+  <div id="form-container" class="hidden">
+    <input type="number" id="montant" placeholder="Montant (€)" />
+    <input type="text" id="prenom" placeholder="Prénom ou pseudo" />
+    <textarea id="message" placeholder="Laisse un message ! (optionnel)"></textarea>
+    
+    <label>
+      <input type="checkbox" id="afficherMontant" checked />
+      Afficher le montant dans le message public
+    </label>
+
+    <div class="paiements">
+      <label><input type="radio" name="moyen" value="stripe" checked /> Stripe</label>
+      <label><input type="radio" name="moyen" value="wero" /> Wero</label>
+      <label><input type="radio" name="moyen" value="rib" /> Virement RIB</label>
+    </div>
+
+    <button id="envoyer">Envoyer</button>
+  </div>
+
+  <h2>📝 Messages des contributeurs</h2>
+  <div id="liste-messages"></div>
 
   <script src="script.js"></script>
 </body>
